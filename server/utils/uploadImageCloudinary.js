@@ -7,15 +7,15 @@ cloudinary.config({
 })
 
 const uploadImageCloudinary = async(image)=>{
-    const buffer = image?.buffer || Buffer.from(await image.arrauBuffer())
+    const buffer = image?.buffer || Buffer.from(await image.arrayBuffer())
 
     const uploadImage = await new Promise((resolve,reject)=>{
         cloudinary.uploader.upload_stream({folder : "SnapCart"},(error,uploadResult)=>{
             return resolve(uploadResult);
-        })
-    }).end(buffer)
+        }).end(buffer)
+    })
 
     return uploadImage
 }
 
-export default uploadImageCloudinary;
+export default uploadImageCloudinary
