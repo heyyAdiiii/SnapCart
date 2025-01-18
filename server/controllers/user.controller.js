@@ -353,6 +353,8 @@ export async function verifyForgotPasswordOtp(req,res){
         }
 
         // If OTP is not expired && OTP is Correct
+        user.forgot_password_otp= null;
+        await user.save();
         return res.json({
             message: "Verify OTP Successfully",
             error:false,
