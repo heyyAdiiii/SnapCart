@@ -8,5 +8,5 @@ body {
     /* font-family: "Macondo", serif;
     font-weight: 400;
     font-style: normal; */
-    @apply bg-blue-100
+    @apply bg-blue-100 
 }

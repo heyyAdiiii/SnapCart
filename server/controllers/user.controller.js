@@ -144,6 +144,9 @@ export async function loginController(req,res){
         const accessToken = await generateAccessToken(user._id);
         const refreshToken = await generateRefreshToken(user._id);
 
+        user.last_login_date = new Date();
+        await user.save();
+
         const cookiesOption = {
             httpOnly : true,
             secure: true,
@@ -216,7 +219,9 @@ export async function uploadAvatar(req,res){
             data: {
                 _id : userId,
                 avatar: upload.url,
-            }
+            },
+            success:true,
+            error:false,
         })
 
     } catch (error) {
@@ -353,7 +358,8 @@ export async function verifyForgotPasswordOtp(req,res){
         }
 
         // If OTP is not expired && OTP is Correct
-        user.forgot_password_otp= null;
+        user.forgot_password_otp= "";
+        user.forgot_password_expiry = "";
         await user.save();
         return res.json({
             message: "Verify OTP Successfully",
@@ -425,7 +431,7 @@ export async function resetPassword(req,res){
 
 export async function refreshToken(req,res){
     try {
-        const refreshToken = req.cookies.refreshToken || req?.head?.authorization?.split(" ")[1]; // [  Bearer ,Token]\
+        const refreshToken = req.cookies.refreshToken || req?.headers?.authorization?.split(" ")[1]; // [  Bearer ,Token]\
         console.log(req);
         if(!refreshToken){
             return res.status(401).json({
@@ -470,6 +476,28 @@ export async function refreshToken(req,res){
             message:error.message||error,
             error:true,
             success:false
+        })
+    }
+}
+
+// get Login user Details
+export async function userDetails(req,res){
+    try {
+        const userId = req.userId;
+
+        const user = await UserModel.findOne({_id:userId}).select('-password -refresh_token');
+
+        return res.json({
+            message:"user-details",
+            data:user,
+            error:false,
+            success:true
+        })
+    } catch (error) {
+        return res.status(500).json({
+            message : error.message||error,
+            error:true,
+            success:false,
         })
     }
 }
