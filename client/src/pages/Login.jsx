@@ -42,6 +42,9 @@ const Login = () => {
 
             if(responses.data.success){
                 toast.success(responses.data.message)
+                // console.log(responses.data.data)
+                localStorage.setItem('accessToken',responses.data.data.accessToken);
+                localStorage.setItem('refreshToken',responses.data.data.refreshToken);
                 setData({
                     email:"",
                     password:"",

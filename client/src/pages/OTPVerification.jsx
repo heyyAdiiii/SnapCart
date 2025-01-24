@@ -40,6 +40,12 @@ const OTPVeification = () => {
       if (responses.data.success) {
         toast.success(responses.data.message);
         setData(["", "", "", "", "", ""]);
+        navigate('/reset-password',{
+          state: {
+            data: responses.data,
+            email:location?.state?.email,
+          }
+        });
       }
 
       // console.log("Response",responses);
