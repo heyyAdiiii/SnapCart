@@ -41,7 +41,7 @@ const header = () => {
   // console.log("isMobile ",isMobile);
 
   return (
-    <header className='h-24 lg:h-20 sticky lg:shadow-md top-0 flex flex-col justify-center gap-1 bg-orange-700'>
+    <header className='h-24 lg:h-20 sticky  lg:shadow-md top-0 z-40 flex flex-col justify-center gap-1 bg-orange-700'>
       {
         !(isSearchPage && isMobile)&&(
           <div className='container mx-auto items-center  flex  justify-between'>
@@ -76,10 +76,10 @@ const header = () => {
         </button>
 
         {/* Desktop */}
-        <div className='hidden lg:flex items-center gap-10'>
+        <div className='hidden lg:flex items-center  gap-10'>
           {
             user?._id? (
-              <div className='relative'>
+              <div className='relative '>
                 <div onClick={() => setOpenUserMenu(prev => !prev)} className='flex select-none items-center gap-2 cursor-pointer'>
                   <p className='font-semibold text-lg'>Account</p>
                   {
@@ -92,7 +92,7 @@ const header = () => {
                 </div>
                 {
                   openUserMenu&& (
-                <div className='absolute right-0 top-12'>
+                <div className='absolute right-0 top-10 shaodow shadow-2xl hover:border-black border-2 overflow-hidden rounded-lg'>
                   <div className='bg-white rounded p-4 min-w-52 lg-shadow-lg'>
                     <UserMenu close={handleCloseUserMenu}/>
                   </div>

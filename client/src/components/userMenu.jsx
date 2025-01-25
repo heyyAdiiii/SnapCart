@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom';
 import Divider from './Divider';
 import Axios from '../utils/Axios'
-import SummaryAPI from '../common/summaryApi';
 import { logout } from '../store/userSlice';
 import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosToastError'
 import { FaLink } from "react-icons/fa";
+import SummaryAPI from '../common/SummaryAPI';
 
 const UserMenu = ({close}) => {
     const user = useSelector((state)=> state.user);
@@ -52,6 +52,10 @@ const UserMenu = ({close}) => {
           <Divider/>
 
           <div className='flex flex-col text-sm gap-2 '>
+          <Link onClick={handleClose} to={'/dashboard/category'} className='px-2 hover:bg-blue-400'>Category</Link>
+          <Link onClick={handleClose} to={'/dashboard/subCategory'} className='px-2 hover:bg-blue-400'>Sub Category</Link>
+          <Link onClick={handleClose} to={'/dashboard/uploadProduct'} className='px-2 hover:bg-blue-400'>Upload Product</Link>
+          <Link onClick={handleClose} to={'/dashboard/product'} className='px-2 hover:bg-blue-400'>Product</Link>
             <Link onClick={handleClose} to={'/dashboard/myorders'} className='px-2 hover:bg-blue-400'>My Orders</Link>
             <Link onClick={handleClose} to={'/dashboard/address'} className='px-2 hover:bg-blue-400'>Save Address</Link>
             <button onClick={handleLogout}  className='text-left px-2  hover:bg-orange-200'>Log out</button>

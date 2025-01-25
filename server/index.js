@@ -7,6 +7,9 @@ import dotenv from 'dotenv';
 dotenv.config()
 import connectDB from './config/connectDB.js'
 import userRoute from './routes/user.route.js'
+import categoryRoute from './routes/category.route.js';
+import uploadRouter from './routes/upload.route.js';
+import userRouter from './routes/user.route.js';
 
 const app = express();
 app.use(cors({
@@ -28,8 +31,9 @@ app.get('/',(req,res)=>{
         message:"Server is Running"+PORT
     });
 })
-app.use('/api/user',userRoute);
-
+app.use('/api/user',userRouter);
+app.use('/api/category',categoryRoute);
+app.use('/api/file',uploadRouter)
 
 connectDB().then(()=>{
     app.listen(PORT,()=>{

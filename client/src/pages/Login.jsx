@@ -3,12 +3,12 @@ import { PiEyesBold } from "react-icons/pi";
 import { PiEyeClosedDuotone } from "react-icons/pi";
 import toast from 'react-hot-toast'
 import Axios from '../utils/Axios';
-import SummaryAPI from '../common/summaryApi';
 import AxiosToastError from '../utils/AxiosToastError';
 import { Link, useNavigate } from 'react-router-dom';
 import fetchUserDetail from '../utils/fetchUserDetails'
 import { useDispatch } from 'react-redux';
 import {setUserDetails} from '../store/userSlice'
+import SummaryAPI from '../common/SummaryAPI';
 
 const Login = () => {
     const [data,setData] = useState({
